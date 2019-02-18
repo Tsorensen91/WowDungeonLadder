@@ -50,8 +50,7 @@ class MainActivity : AppCompatActivity() {
                 connection.readTimeout = 10000
                 connection.requestMethod = "GET"
                 connection.connect()
-                val smallChange = url
-                val small = url
+                
                 val responseCode = connection.responseCode
                 if (responseCode == HttpURLConnection.HTTP_OK) {
                     val scanner = Scanner(connection.inputStream).useDelimiter("\\A")
