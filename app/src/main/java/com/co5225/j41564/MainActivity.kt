@@ -2,9 +2,12 @@ package com.co5225.j41564
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.Menu
 import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.card_layout.*
 import org.json.JSONObject
 import java.io.IOException
 import java.net.HttpURLConnection
@@ -13,10 +16,17 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var layoutManager: RecyclerView.LayoutManager
+    private lateinit var adapter: RecyclerAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+        layoutManager = LinearLayoutManager(this)
+        rvDungeonRunList.layoutManager = layoutManager
+        adapter = RecyclerAdapter()
+        rvDungeonRunList.adapter = adapter
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -76,7 +86,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateTextView(text: String) {
         runOnUiThread{
-            textView.text = text
+            tvDifficulty.text = text
         }
     }
 }
