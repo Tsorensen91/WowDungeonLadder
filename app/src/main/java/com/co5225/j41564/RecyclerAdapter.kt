@@ -5,13 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.card_layout.view.*
+import org.json.JSONObject
+import java.io.IOException
+import java.net.HttpURLConnection
+import java.net.URL
+import java.util.*
 
-class RecyclerAdapter  : RecyclerView.Adapter<RecyclerAdapter.ViewHolder> (){
+class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder> (){
 
     var list = mutableListOf<DungeonRun>()
 
     init {
-        
+
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
@@ -20,17 +25,22 @@ class RecyclerAdapter  : RecyclerView.Adapter<RecyclerAdapter.ViewHolder> (){
     }
 
     override fun getItemCount(): Int {
-        return 125
+        return list.size
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        viewHolder.itemView.tvDifficulty.text = "+20"
-        viewHolder.itemView.tvDungeonName.text = "Freehold"
-        viewHolder.itemView.tvRank.text = position.toString()
+        val cardView = viewHolder.itemView
+        val item = list[position]
+        cardView.tvRank.text = item.rank.toString()
+        cardView.tvDifficulty.text = item.difficulty.toString()
+        cardView.tvDungeonName.text = item.name
     }
 
 
     inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
-
     }
+
+
+
+
 }
