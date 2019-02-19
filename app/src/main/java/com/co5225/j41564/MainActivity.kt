@@ -1,16 +1,11 @@
 package com.co5225.j41564
 
-import android.app.Activity
-import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.Menu
-import android.view.MenuItem
-import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.card_layout.*
 import org.json.JSONObject
 import java.io.IOException
 import java.net.HttpURLConnection

@@ -1,17 +1,10 @@
 package com.co5225.j41564
 
-import android.content.Context
-import android.support.annotation.MainThread
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.card_layout.view.*
-import org.json.JSONObject
-import java.io.IOException
-import java.net.HttpURLConnection
-import java.net.URL
-import java.util.*
 
 class RecyclerAdapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder> (){
 
