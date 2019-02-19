@@ -1,10 +1,13 @@
 package com.co5225.j41564
 
+import android.app.Activity
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.card_layout.*
@@ -27,11 +30,24 @@ class MainActivity : AppCompatActivity() {
         rvDungeonRunList.layoutManager = layoutManager
         adapter = RecyclerAdapter()
         rvDungeonRunList.adapter = adapter
+        getQuote()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main,menu)
         return super.onCreateOptionsMenu(menu)
+    }
+
+    fun addRun (run : DungeonRun) {
+        runOnUiThread {
+            adapter.addRun(run)
+        }
+    }
+
+    fun addRunFromList (list : List<DungeonRun>) {
+        for (i in list.indices) {
+            addRun(list[i])
+        }
     }
 
     fun getQuote() {
@@ -55,10 +71,8 @@ class MainActivity : AppCompatActivity() {
         return list
     }
 
-    public fun fetchData (urlString: String){
+    fun fetchData (urlString: String){
         var list = mutableListOf<DungeonRun>()
-        var testRun = DungeonRun("no",1,1)
-        list.add(testRun)
         val thread = Thread{
             try {
                 val url = URL(urlString)
@@ -73,10 +87,11 @@ class MainActivity : AppCompatActivity() {
                     val scanner = Scanner(connection.inputStream).useDelimiter("\\A")
                     val text = if (scanner.hasNext()) scanner.next() else ""
                     var tempList = processMatchJson(text)
-                    for(i in tempList.indices) {
-
-                        addRun(tempList[i])
+                    for( i in tempList.indices) {
+                        list.add(tempList[i])
                     }
+                    addRunFromList(list)
+
 
                 } else {
                     var errorRun = DungeonRun(("the server has returned an error: $responseCode"),0,0)
@@ -90,15 +105,17 @@ class MainActivity : AppCompatActivity() {
                 errorList.add(errorRun)
                 list = errorList
             }
-
         }
         thread.start()
     }
 
-    fun RecyclerAdapter.addRun (run : DungeonRun) {
-        this.list.add(run)
-        notifyItemInserted(list.lastIndex)
-    }
+
+
+
+
+
+
+
 
 
 }

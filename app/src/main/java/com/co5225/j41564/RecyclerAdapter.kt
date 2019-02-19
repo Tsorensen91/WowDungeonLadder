@@ -1,5 +1,7 @@
 package com.co5225.j41564
 
+import android.content.Context
+import android.support.annotation.MainThread
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +13,7 @@ import java.net.HttpURLConnection
 import java.net.URL
 import java.util.*
 
-class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder> (){
+class RecyclerAdapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder> (){
 
     var list = mutableListOf<DungeonRun>()
 
@@ -36,9 +38,15 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder> (){
         cardView.tvDungeonName.text = item.name
     }
 
-
     inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
     }
+
+    fun addRun (run : DungeonRun) {
+            list.add(run)
+            notifyItemInserted(list.lastIndex)
+
+    }
+
 
 
 
