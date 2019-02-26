@@ -9,10 +9,7 @@ import kotlinx.android.synthetic.main.card_layout.view.*
 class RecyclerAdapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder> (){
 
     var list = mutableListOf<DungeonRun>()
-
-    init {
-
-    }
+    
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.card_layout, viewGroup, false)

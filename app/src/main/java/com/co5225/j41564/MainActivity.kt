@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         rvDungeonRunList.layoutManager = layoutManager
         adapter = RecyclerAdapter()
         rvDungeonRunList.adapter = adapter
-        getQuote()
+        getDungeonRuns()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -45,29 +45,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun getQuote() {
+    fun getDungeonRuns() {
         fetchData("https://raider.io/api/v1/mythic-plus/runs?season=season-bfa-2&region=world&dungeon=all")
     }
 
-    private fun processMatchJson(jsonString: String) : List<DungeonRun> {
-        val jsonObject = JSONObject(jsonString)
-        val rankingsArray = jsonObject.getJSONArray("rankings")
-        var list = mutableListOf<DungeonRun>()
-        for (j in 0..19) {
-            val rankObject = rankingsArray.getJSONObject(j)
-            val rankings = rankObject.get("rank").toString().toInt()
-            val runObject = rankObject.getJSONObject("run")
-            val dungeonObject = runObject.getJSONObject("dungeon")
-            val dungeonName = dungeonObject.get("name").toString()
-            val dungeonLevel = runObject.get("mythic_level").toString().toInt()
-            val dungeonRun = DungeonRun(dungeonName,dungeonLevel,rankings)
-            list.add(dungeonRun)
-        }
-        return list
-    }
-
     fun fetchData (urlString: String){
-        var list = mutableListOf<DungeonRun>()
         val thread = Thread{
             try {
                 val url = URL(urlString)
@@ -81,35 +63,19 @@ class MainActivity : AppCompatActivity() {
                 if (responseCode == HttpURLConnection.HTTP_OK) {
                     val scanner = Scanner(connection.inputStream).useDelimiter("\\A")
                     val text = if (scanner.hasNext()) scanner.next() else ""
-                    var tempList = processMatchJson(text)
-                    for( i in tempList.indices) {
-                        list.add(tempList[i])
-                    }
+                    var jsonPacket = JSONUnpacker(text)
+                    var list = jsonPacket.getDungeonList()
                     addRunFromList(list)
 
-
                 } else {
-                    var errorRun = DungeonRun(("the server has returned an error: $responseCode"),0,0)
-                    var errorList = mutableListOf<DungeonRun>()
-                    errorList.add(errorRun)
-                    list = errorList
+                    println("the server has returned an error: $responseCode")
                 }
             } catch (e: IOException) {
-                var errorRun = DungeonRun(("en error occurred retrieving data"),0,0)
-                var errorList = mutableListOf<DungeonRun>()
-                errorList.add(errorRun)
-                list = errorList
+                println("en error occurred retrieving data")
             }
         }
         thread.start()
     }
-
-
-
-
-
-
-
 
 
 

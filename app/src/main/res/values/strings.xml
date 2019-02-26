@@ -1,4 +1,11 @@
 <resources>
-    <string name="app_name">J41564</string>
+    <string name="app_name">WoW Dungeon Ladder</string>
     <string name="search_dungeon_runs">Search Dungeon Runs</string>
+    <string-array name="region_array">
+        <item>world</item>
+        <item>eu</item>
+        <item>us</item>
+        <item>kr</item>
+        <item>tw</item>
+    </string-array>
 </resources>
