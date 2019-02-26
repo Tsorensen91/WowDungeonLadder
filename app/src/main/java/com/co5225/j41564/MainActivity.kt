@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         newSearch()
+
         return super.onOptionsItemSelected(item)
     }
 
@@ -49,6 +50,7 @@ class MainActivity : AppCompatActivity() {
     fun addRunFromList (list : List<DungeonRun>) {
         for (i in list.indices) {
             addRun(list[i])
+
         }
     }
 
@@ -60,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         val thread = Thread{
             try {
                 val url = URL(urlString)
-                val connection: HttpURLConnection = url.openConnection() as HttpURLConnection;
+                val connection: HttpURLConnection = url.openConnection() as HttpURLConnection
                 connection.connectTimeout = 10000
                 connection.readTimeout = 10000
                 connection.requestMethod = "GET"
@@ -70,8 +72,8 @@ class MainActivity : AppCompatActivity() {
                 if (responseCode == HttpURLConnection.HTTP_OK) {
                     val scanner = Scanner(connection.inputStream).useDelimiter("\\A")
                     val text = if (scanner.hasNext()) scanner.next() else ""
-                    var jsonPacket = JSONUnpacker(text)
-                    var list = jsonPacket.getDungeonList()
+                    val jsonPacket = JSONUnpacker(text)
+                    val list = jsonPacket.getDungeonList()
                     addRunFromList(list)
 
                 } else {

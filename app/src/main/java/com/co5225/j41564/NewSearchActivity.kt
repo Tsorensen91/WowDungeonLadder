@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import kotlinx.android.synthetic.main.activity_new_search.*
 
+
 class NewSearchActivity : AppCompatActivity() {
 
     lateinit var adapter: ArrayAdapter<CharSequence>
@@ -29,7 +30,7 @@ class NewSearchActivity : AppCompatActivity() {
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val selectedItem = parent?.getItemAtPosition(position).toString()
+
             }
         }
         adapter = ArrayAdapter.createFromResource(this,R.array.dungeon_array,android.R.layout.simple_spinner_item)
@@ -40,7 +41,7 @@ class NewSearchActivity : AppCompatActivity() {
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val selectedItem = parent?.getItemAtPosition(position).toString()
+
             }
         }
 
@@ -52,7 +53,7 @@ class NewSearchActivity : AppCompatActivity() {
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val selectedItem = parent?.getItemAtPosition(position).toString()
+
             }
         }
 
@@ -64,7 +65,7 @@ class NewSearchActivity : AppCompatActivity() {
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val selectedItem = parent?.getItemAtPosition(position).toString()
+                //val selectedItem = parent?.getItemAtPosition(position).toString()
             }
         }
     }

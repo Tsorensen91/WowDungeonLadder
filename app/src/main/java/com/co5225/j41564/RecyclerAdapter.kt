@@ -34,6 +34,7 @@ class RecyclerAdapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder> (){
     fun addRun (run : DungeonRun) {
             list.add(run)
             notifyItemInserted(list.lastIndex)
+
     }
 
 

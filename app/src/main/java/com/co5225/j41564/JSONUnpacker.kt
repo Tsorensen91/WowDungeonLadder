@@ -4,6 +4,7 @@ import org.json.JSONObject
 
 class JSONUnpacker (jsonString: String){
 
+
     val jsonObject = JSONObject(jsonString)
     val rankingsArray = jsonObject.getJSONArray("rankings")
     var list = mutableListOf<DungeonRun>()
@@ -19,7 +20,7 @@ class JSONUnpacker (jsonString: String){
 
             val modifierNumber = runObject.get("num_modifiers_active").toString().toInt()
             val modifierArray = runObject.getJSONArray("weekly_modifiers")
-            var modifierList = mutableListOf<String>()
+            val modifierList = mutableListOf<String>()
             for (i in 0..modifierNumber-1){
                 val modifierObject = modifierArray.getJSONObject(i)
                 val modifier = modifierObject.get("name").toString()
@@ -27,7 +28,7 @@ class JSONUnpacker (jsonString: String){
             }
 
             val rosterArray = runObject.getJSONArray("roster")
-            var classList = mutableListOf<String>()
+            val classList = mutableListOf<String>()
             for(i in 0..4) {
                 val characterArray = rosterArray.getJSONObject(i)
                 val characterObject = characterArray.getJSONObject("character")

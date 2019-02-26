@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">WoW Dungeon Ladder</string>
     <string name="search">Search</string>
+    <string name="region">Region</string>
+    <string name="dungeon">Dungeon</string>
+    <string name="character_class">Class</string>
+    <string name="fortified_tyrannical">Fortified/Tyrannical</string>
+    <string name="_20">+20</string>
+    <string name="_1">1</string>
     <string-array name="region_array">
         <item>All</item>
         <item>EU</item>
@@ -8,6 +14,7 @@
         <item>KR</item>
         <item>TW</item>
     </string-array>
+
 
     <string-array name="dungeon_array">
         <item>All</item>
