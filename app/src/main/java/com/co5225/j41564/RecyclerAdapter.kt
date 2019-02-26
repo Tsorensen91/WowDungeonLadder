@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.card_layout.view.*
 class RecyclerAdapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder> (){
 
     var list = mutableListOf<DungeonRun>()
-    
+
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.card_layout, viewGroup, false)
@@ -34,7 +34,6 @@ class RecyclerAdapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder> (){
     fun addRun (run : DungeonRun) {
             list.add(run)
             notifyItemInserted(list.lastIndex)
-
     }
 
 

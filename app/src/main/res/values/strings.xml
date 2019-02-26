@@ -1,11 +1,47 @@
 <resources>
     <string name="app_name">WoW Dungeon Ladder</string>
-    <string name="search_dungeon_runs">Search Dungeon Runs</string>
+    <string name="search">Search</string>
     <string-array name="region_array">
-        <item>world</item>
-        <item>eu</item>
-        <item>us</item>
-        <item>kr</item>
-        <item>tw</item>
+        <item>All</item>
+        <item>EU</item>
+        <item>US</item>
+        <item>KR</item>
+        <item>TW</item>
+    </string-array>
+
+    <string-array name="dungeon_array">
+        <item>All</item>
+        <item>AtalDazar</item>
+        <item>Freehold</item>
+        <item>Kings Rest</item>
+        <item>Shrine of the Storm</item>
+        <item>Siege of Boralus</item>
+        <item>Temple of Sethraliss</item>
+        <item>The Motherlode!!</item>
+        <item>The Underrot</item>
+        <item>Tol Dagor</item>
+        <item>Waycrest Manor</item>
+    </string-array>
+
+    <string-array name="class_array">
+        <item>All</item>
+        <item>Death Knight</item>
+        <item>Demon Hunter</item>
+        <item>Druid</item>
+        <item>Hunter</item>
+        <item>Mage</item>
+        <item>Monk</item>
+        <item>Paladin</item>
+        <item>Priest</item>
+        <item>Rogue</item>
+        <item>Shaman</item>
+        <item>Warlock</item>
+        <item>Warrior</item>
+    </string-array>
+
+    <string-array name="affix_array">
+        <item>All</item>
+        <item>Fortified</item>
+        <item>Tyrannical</item>
     </string-array>
 </resources>

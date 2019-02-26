@@ -1,10 +1,12 @@
 package com.co5225.j41564
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.Menu
+import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONObject
 import java.io.IOException
@@ -31,6 +33,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main,menu)
         return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        newSearch()
+        return super.onOptionsItemSelected(item)
     }
 
     fun addRun (run : DungeonRun) {
@@ -75,6 +82,15 @@ class MainActivity : AppCompatActivity() {
             }
         }
         thread.start()
+    }
+
+    fun buttonOnClick(){
+        newSearch()
+    }
+
+    private fun newSearch() {
+        val intent = Intent(this,NewSearchActivity::class.java)
+        startActivityForResult(intent,0)
     }
 
 
