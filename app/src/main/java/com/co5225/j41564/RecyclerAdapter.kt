@@ -28,36 +28,139 @@ class RecyclerAdapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder> (){
         val affix2 = item.modifiers[1]
         val affix3 = item.modifiers[2]
         when (affix1) {
+            "Tyrannical" -> cardView.affix1.setImageResource(R.drawable.tyrannical)
             "Fortified" -> cardView.affix1.setImageResource(R.drawable.fortified)
         }
-        when (affix2) {
-            "Bolstering" -> cardView.affix2.setImageResource(R.drawable.bolstering)
-            "Bursting" -> cardView.affix2.setImageResource(R.drawable.bursting)
-            "Explosive" -> cardView.affix2.setImageResource(R.drawable.explosive)
-            "Grievous" -> cardView.affix2.setImageResource(R.drawable.grievous)
-            "Necrotic" -> cardView.affix2.setImageResource(R.drawable.necrotic)
-            "Quaking" -> cardView.affix2.setImageResource(R.drawable.quaking)
-            "Raging" -> cardView.affix2.setImageResource(R.drawable.raging)
-            "Sanguine" -> cardView.affix2.setImageResource(R.drawable.sanguine)
-            "Teeming" -> cardView.affix2.setImageResource(R.drawable.teeming)
-            "Volcanic" -> cardView.affix2.setImageResource(R.drawable.volcanic)
-        }
-        when (affix3) {
-            "Bolstering" -> cardView.affix2.setImageResource(R.drawable.bolstering)
-            "Bursting" -> cardView.affix2.setImageResource(R.drawable.bursting)
-            "Explosive" -> cardView.affix2.setImageResource(R.drawable.explosive)
-            "Grievous" -> cardView.affix2.setImageResource(R.drawable.grievous)
-            "Necrotic" -> cardView.affix2.setImageResource(R.drawable.necrotic)
-            "Quaking" -> cardView.affix2.setImageResource(R.drawable.quaking)
-            "Raging" -> cardView.affix2.setImageResource(R.drawable.raging)
-            "Sanguine" -> cardView.affix2.setImageResource(R.drawable.sanguine)
-            "Teeming" -> cardView.affix2.setImageResource(R.drawable.teeming)
-            "Volcanic" -> cardView.affix2.setImageResource(R.drawable.volcanic)
-        }
+        generalAffixImageAssigner(cardView, affix2, 2)
+        generalAffixImageAssigner(cardView, affix3, 3)
+
+        val class1 = item.classes[0]
+        val class2 = item.classes[1]
+        val class3 = item.classes[2]
+        val class4 = item.classes[3]
+        val class5 = item.classes[4]
+        classImageAssigner(cardView, class1, 1)
+        classImageAssigner(cardView, class2, 2)
+        classImageAssigner(cardView, class3, 3)
+        classImageAssigner(cardView, class4, 4)
+        classImageAssigner(cardView, class5, 5)
+
         cardView.tvRank.text = item.rank.toString()
         cardView.tvDifficulty.text = difficulty
         cardView.tvDungeonName.text = item.name
 
+    }
+
+    private fun classImageAssigner(cardView: View, characterClass: String, characterNr : Int) {
+        when (characterNr) {
+            1 ->
+            when (characterClass) {
+                "Death Knight" -> cardView.class1.setImageResource(R.drawable.class_deathknight)
+                "Demon Hunter" -> cardView.class1.setImageResource(R.drawable.class_demonhunter)
+                "Druid" -> cardView.class1.setImageResource(R.drawable.class_druid)
+                "Hunter" -> cardView.class1.setImageResource(R.drawable.class_hunter)
+                "Mage" -> cardView.class1.setImageResource(R.drawable.class_mage)
+                "Monk" -> cardView.class1.setImageResource(R.drawable.class_monk)
+                "Paladin" -> cardView.class1.setImageResource(R.drawable.class_paladin)
+                "Priest" -> cardView.class1.setImageResource(R.drawable.class_priest)
+                "Rogue" -> cardView.class1.setImageResource(R.drawable.class_rogue)
+                "Shaman" -> cardView.class1.setImageResource(R.drawable.class_shaman)
+                "Warlock" -> cardView.class1.setImageResource(R.drawable.class_warlock)
+                "Warrior" -> cardView.class1.setImageResource(R.drawable.class_warrior)
+            }
+            2->
+            when (characterClass) {
+                "Death Knight" -> cardView.class2.setImageResource(R.drawable.class_deathknight)
+                "Demon Hunter" -> cardView.class2.setImageResource(R.drawable.class_demonhunter)
+                "Druid" -> cardView.class2.setImageResource(R.drawable.class_druid)
+                "Hunter" -> cardView.class2.setImageResource(R.drawable.class_hunter)
+                "Mage" -> cardView.class2.setImageResource(R.drawable.class_mage)
+                "Monk" -> cardView.class2.setImageResource(R.drawable.class_monk)
+                "Paladin" -> cardView.class2.setImageResource(R.drawable.class_paladin)
+                "Priest" -> cardView.class2.setImageResource(R.drawable.class_priest)
+                "Rogue" -> cardView.class2.setImageResource(R.drawable.class_rogue)
+                "Shaman" -> cardView.class2.setImageResource(R.drawable.class_shaman)
+                "Warlock" -> cardView.class2.setImageResource(R.drawable.class_warlock)
+                "Warrior" -> cardView.class2.setImageResource(R.drawable.class_warrior)
+            }
+            3->
+            when (characterClass) {
+                "Death Knight" -> cardView.class3.setImageResource(R.drawable.class_deathknight)
+                "Demon Hunter" -> cardView.class3.setImageResource(R.drawable.class_demonhunter)
+                "Druid" -> cardView.class3.setImageResource(R.drawable.class_druid)
+                "Hunter" -> cardView.class3.setImageResource(R.drawable.class_hunter)
+                "Mage" -> cardView.class3.setImageResource(R.drawable.class_mage)
+                "Monk" -> cardView.class3.setImageResource(R.drawable.class_monk)
+                "Paladin" -> cardView.class3.setImageResource(R.drawable.class_paladin)
+                "Priest" -> cardView.class3.setImageResource(R.drawable.class_priest)
+                "Rogue" -> cardView.class3.setImageResource(R.drawable.class_rogue)
+                "Shaman" -> cardView.class3.setImageResource(R.drawable.class_shaman)
+                "Warlock" -> cardView.class3.setImageResource(R.drawable.class_warlock)
+                "Warrior" -> cardView.class3.setImageResource(R.drawable.class_warrior)
+            }
+            4->
+            when (characterClass) {
+                "Death Knight" -> cardView.class4.setImageResource(R.drawable.class_deathknight)
+                "Demon Hunter" -> cardView.class4.setImageResource(R.drawable.class_demonhunter)
+                "Druid" -> cardView.class4.setImageResource(R.drawable.class_druid)
+                "Hunter" -> cardView.class4.setImageResource(R.drawable.class_hunter)
+                "Mage" -> cardView.class4.setImageResource(R.drawable.class_mage)
+                "Monk" -> cardView.class4.setImageResource(R.drawable.class_monk)
+                "Paladin" -> cardView.class4.setImageResource(R.drawable.class_paladin)
+                "Priest" -> cardView.class4.setImageResource(R.drawable.class_priest)
+                "Rogue" -> cardView.class4.setImageResource(R.drawable.class_rogue)
+                "Shaman" -> cardView.class4.setImageResource(R.drawable.class_shaman)
+                "Warlock" -> cardView.class4.setImageResource(R.drawable.class_warlock)
+                "Warrior" -> cardView.class4.setImageResource(R.drawable.class_warrior)
+            }
+            5->
+            when (characterClass) {
+                "Death Knight" -> cardView.class5.setImageResource(R.drawable.class_deathknight)
+                "Demon Hunter" -> cardView.class5.setImageResource(R.drawable.class_demonhunter)
+                "Druid" -> cardView.class5.setImageResource(R.drawable.class_druid)
+                "Hunter" -> cardView.class5.setImageResource(R.drawable.class_hunter)
+                "Mage" -> cardView.class5.setImageResource(R.drawable.class_mage)
+                "Monk" -> cardView.class5.setImageResource(R.drawable.class_monk)
+                "Paladin" -> cardView.class5.setImageResource(R.drawable.class_paladin)
+                "Priest" -> cardView.class5.setImageResource(R.drawable.class_priest)
+                "Rogue" -> cardView.class5.setImageResource(R.drawable.class_rogue)
+                "Shaman" -> cardView.class5.setImageResource(R.drawable.class_shaman)
+                "Warlock" -> cardView.class5.setImageResource(R.drawable.class_warlock)
+                "Warrior" -> cardView.class5.setImageResource(R.drawable.class_warrior)
+            }
+        }
+    }
+
+    private fun generalAffixImageAssigner(cardView: View, affix: String, affixNr : Int) {
+        if (affixNr == 2) {
+            when (affix) {
+                "Bolstering" -> cardView.affix2.setImageResource(R.drawable.bolstering)
+                "Bursting" -> cardView.affix2.setImageResource(R.drawable.bursting)
+                "Explosive" -> cardView.affix2.setImageResource(R.drawable.explosive)
+                "Grievous" -> cardView.affix2.setImageResource(R.drawable.grievous)
+                "Necrotic" -> cardView.affix2.setImageResource(R.drawable.necrotic)
+                "Quaking" -> cardView.affix2.setImageResource(R.drawable.quaking)
+                "Raging" -> cardView.affix2.setImageResource(R.drawable.raging)
+                "Sanguine" -> cardView.affix2.setImageResource(R.drawable.sanguine)
+                "Skittish" -> cardView.affix2.setImageResource(R.drawable.skittish)
+                "Teeming" -> cardView.affix2.setImageResource(R.drawable.teeming)
+                "Volcanic" -> cardView.affix2.setImageResource(R.drawable.volcanic)
+            }
+        } else {
+            when (affix) {
+                "Bolstering" -> cardView.affix3.setImageResource(R.drawable.bolstering)
+                "Bursting" -> cardView.affix3.setImageResource(R.drawable.bursting)
+                "Explosive" -> cardView.affix3.setImageResource(R.drawable.explosive)
+                "Grievous" -> cardView.affix3.setImageResource(R.drawable.grievous)
+                "Necrotic" -> cardView.affix3.setImageResource(R.drawable.necrotic)
+                "Quaking" -> cardView.affix3.setImageResource(R.drawable.quaking)
+                "Raging" -> cardView.affix3.setImageResource(R.drawable.raging)
+                "Sanguine" -> cardView.affix3.setImageResource(R.drawable.sanguine)
+                "Skittish" -> cardView.affix3.setImageResource(R.drawable.skittish)
+                "Teeming" -> cardView.affix3.setImageResource(R.drawable.teeming)
+                "Volcanic" -> cardView.affix3.setImageResource(R.drawable.volcanic)
+            }
+        }
     }
 
     inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {

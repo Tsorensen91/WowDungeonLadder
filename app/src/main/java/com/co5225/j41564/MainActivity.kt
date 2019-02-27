@@ -2,6 +2,8 @@ package com.co5225.j41564
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -29,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         rvDungeonRunList.layoutManager = layoutManager
         adapter = RecyclerAdapter()
         rvDungeonRunList.adapter = adapter
-
+        actionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#144587")))
         getDungeonRuns(searchParameters)
     }
 
