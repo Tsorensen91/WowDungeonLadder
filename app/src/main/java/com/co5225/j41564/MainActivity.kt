@@ -1,5 +1,6 @@
 package com.co5225.j41564
 
+import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -18,6 +19,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var layoutManager: RecyclerView.LayoutManager
     private lateinit var adapter: RecyclerAdapter
+    var searchParameters : Array<String> = arrayOf("All", "All", "All", "All")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +29,8 @@ class MainActivity : AppCompatActivity() {
         rvDungeonRunList.layoutManager = layoutManager
         adapter = RecyclerAdapter()
         rvDungeonRunList.adapter = adapter
-        getDungeonRuns()
+
+        getDungeonRuns(searchParameters)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -37,8 +40,18 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         newSearch()
-
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+            if (resultCode == Activity.RESULT_OK) {
+                @Suppress("UNCHECKED_CAST")
+                val newSearch = data?.getSerializableExtra("search") as Array<String>
+                adapter.removeRuns()
+                getDungeonRuns(newSearch)
+            }
+
     }
 
     fun addRun (run : DungeonRun) {
@@ -54,8 +67,41 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun getDungeonRuns() {
-        fetchData("https://raider.io/api/v1/mythic-plus/runs?season=season-bfa-2&region=world&dungeon=all")
+    fun getDungeonRuns(searchParameters: Array<String>) {
+        fetchData(urlCompiler(searchParameters))
+    }
+
+    fun urlCompiler(searchParameters : Array<String>): String{
+        val baseURl = "https://raider.io/api/v1/mythic-plus/runs?season=season-bfa-2"
+        var regionURL = ""
+        var dungeonURL = ""
+        var affixURL = ""
+        when (searchParameters[0]) {
+            "All" -> regionURL = "&region=world"
+            "EU" -> regionURL = "&region=eu"
+            "US" -> regionURL = "&region=us"
+            "TW" -> regionURL = "&region=tw"
+            "KR" -> regionURL = "&region=kr"
+        }
+        when (searchParameters[1]) {
+            "All" -> dungeonURL = ""
+            "AtalDazar" -> dungeonURL = "&dungeon=ataldazar"
+            "Freehold" -> dungeonURL = "&dungeon=freehold"
+            "Kings rest" -> dungeonURL = "&dungeon=kings-rest"
+            "Shrine of the Storm" -> dungeonURL = "&dungeon=shrine-of-the-storm"
+            "Siege of Boralus" -> dungeonURL = "&dungeon=siege-of-boralus"
+            "Temple of Sethraliss" -> dungeonURL = "&dungeon=temple-of-sethraliss"
+            "The Motherlode!!" -> dungeonURL = "&dungeon=the-motherlode"
+            "The Underrot" -> dungeonURL = "&dungeon=the-underrot"
+            "Tol Dagor" -> dungeonURL = "&dungeon=tol-dagor"
+            "Waycrest Manor" -> dungeonURL = "&dungeon=waycrest-manor"
+        }
+        when (searchParameters[2]) {
+            "All" -> affixURL = ""
+            "Tyrannical" -> affixURL = "&affixes=tyrannical"
+            "Fortified" -> affixURL = "&affixes=fortified"
+        }
+        return baseURl+regionURL+dungeonURL+affixURL
     }
 
     fun fetchData (urlString: String){
@@ -84,10 +130,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
         thread.start()
-    }
-
-    fun buttonOnClick(){
-        newSearch()
     }
 
     private fun newSearch() {

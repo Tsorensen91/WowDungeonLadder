@@ -1,12 +1,13 @@
 <resources>
     <string name="app_name">WoW Dungeon Ladder</string>
-    <string name="search">Search</string>
     <string name="region">Region</string>
     <string name="dungeon">Dungeon</string>
     <string name="character_class">Class</string>
     <string name="fortified_tyrannical">Fortified/Tyrannical</string>
     <string name="_20">+20</string>
     <string name="_1">1</string>
+    <string name="search">Search</string>
+    <string name="dungeon_modifier">Dungeon Modifier</string>
     <string-array name="region_array">
         <item>All</item>
         <item>EU</item>
@@ -28,22 +29,6 @@
         <item>The Underrot</item>
         <item>Tol Dagor</item>
         <item>Waycrest Manor</item>
-    </string-array>
-
-    <string-array name="class_array">
-        <item>All</item>
-        <item>Death Knight</item>
-        <item>Demon Hunter</item>
-        <item>Druid</item>
-        <item>Hunter</item>
-        <item>Mage</item>
-        <item>Monk</item>
-        <item>Paladin</item>
-        <item>Priest</item>
-        <item>Rogue</item>
-        <item>Shaman</item>
-        <item>Warlock</item>
-        <item>Warrior</item>
     </string-array>
 
     <string-array name="affix_array">
