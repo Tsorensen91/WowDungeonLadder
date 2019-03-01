@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         rvDungeonRunList.layoutManager = layoutManager
         adapter = RecyclerAdapter()
         rvDungeonRunList.adapter = adapter
-        actionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#144587")))
+        toolbar.setBackgroundColor(Color.parseColor("#144587"))
         getDungeonRuns(searchParameters)
     }
 
