@@ -2,11 +2,12 @@ package com.co5225.j41564
 
 import android.app.Activity
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
+import android.preference.PreferenceManager
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
@@ -22,18 +23,18 @@ class MainActivity : AppCompatActivity(), SearchFragment.SearchFragmentListener 
 
     private lateinit var listFragment: DungeonListFragment
     var searchParameters : Array<String> = arrayOf("All", "All", "All", "All")
-
-
+    var preferenceChangedListener = SharedPreferences.OnSharedPreferenceChangeListener{sharedPreferences, key -> updateTheme()}
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         listFragment = listFr as DungeonListFragment
         setSupportActionBar(toolbar)
-        toolbar.setBackgroundColor(Color.parseColor("#144587"))
+        toolbar.setTitleTextColor(Color.parseColor("#FFFFFF"))
+        updateTheme()
+        PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(preferenceChangedListener)
         if (savedInstanceState!= null) {
             searchParameters = savedInstanceState.getStringArray("searchParameters")!!
         }
-
         getDungeonRuns(searchParameters)
 
     }
@@ -67,7 +68,12 @@ class MainActivity : AppCompatActivity(), SearchFragment.SearchFragmentListener 
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        newSearch()
+
+        if (item?.itemId == R.id.action_settings) {
+            openSettings()
+        } else {
+            openSearch()
+        }
         return super.onOptionsItemSelected(item)
     }
 
@@ -76,7 +82,22 @@ class MainActivity : AppCompatActivity(), SearchFragment.SearchFragmentListener 
         outState?.putStringArray("searchParameters", searchParameters)
     }
 
-    private fun newSearch() {
+    private fun updateTheme() {
+        val preference = PreferenceManager.getDefaultSharedPreferences(this)
+        val redTheme = preference.getBoolean("theme_changer",false)
+        if (redTheme) {
+            toolbar.setBackgroundColor(Color.parseColor("#8C1616"))
+        } else {
+            toolbar.setBackgroundColor(Color.parseColor("#144587"))
+        }
+    }
+
+    private fun openSettings() {
+        val intent = Intent(this,SettingsActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun openSearch() {
         val intent = Intent(this,NewSearchActivity::class.java)
         startActivityForResult(intent,0)
     }
