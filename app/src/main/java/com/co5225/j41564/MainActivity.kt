@@ -2,41 +2,67 @@ package com.co5225.j41564
 
 import android.app.Activity
 import android.content.Intent
+import android.content.res.Configuration
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import android.os.PersistableBundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Button
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
-import org.json.JSONObject
 import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.URL
 import java.util.*
 
-class MainActivity : AppCompatActivity() {
 
-    private lateinit var layoutManager: RecyclerView.LayoutManager
-    private lateinit var adapter: RecyclerAdapter
+class MainActivity : AppCompatActivity(), SearchFragment.SearchFragmentListener {
+
+    private lateinit var listFragment: DungeonListFragment
     var searchParameters : Array<String> = arrayOf("All", "All", "All", "All")
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        listFragment = listFr as DungeonListFragment
         setSupportActionBar(toolbar)
-        layoutManager = LinearLayoutManager(this)
-        rvDungeonRunList.layoutManager = layoutManager
-        adapter = RecyclerAdapter()
-        rvDungeonRunList.adapter = adapter
         toolbar.setBackgroundColor(Color.parseColor("#144587"))
+        if (savedInstanceState!= null) {
+            searchParameters = savedInstanceState.getStringArray("searchParameters")!!
+        }
+
         getDungeonRuns(searchParameters)
+
+    }
+
+    override fun onSearch(searchParameter: Array<String>) {
+        val searchButton = findViewById<Button>(R.id.searchButton)
+        searchButton.setOnClickListener{
+            listFragment.adapter.removeRuns()
+            for (i in searchParameter.indices) searchParameters[i] = searchParameter[i]
+            getDungeonRuns(searchParameters)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            @Suppress("UNCHECKED_CAST")
+            val newSearch = data?.getSerializableExtra("search") as Array<String>
+            for (i in newSearch.indices) searchParameters[i] = newSearch[i]
+            listFragment.adapter.removeRuns()
+            getDungeonRuns(searchParameters)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main,menu)
+        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            menu!!.findItem(R.id.menu_search).isVisible = false
+        }
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -45,27 +71,21 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-            if (resultCode == Activity.RESULT_OK) {
-                @Suppress("UNCHECKED_CAST")
-                val newSearch = data?.getSerializableExtra("search") as Array<String>
-                adapter.removeRuns()
-                getDungeonRuns(newSearch)
-            }
-
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        outState?.putStringArray("searchParameters", searchParameters)
     }
 
-    fun addRun (run : DungeonRun) {
-        runOnUiThread {
-            adapter.addRun(run)
-        }
+    private fun newSearch() {
+        val intent = Intent(this,NewSearchActivity::class.java)
+        startActivityForResult(intent,0)
     }
 
     fun addRunFromList (list : List<DungeonRun>) {
-        for (i in list.indices) {
-            addRun(list[i])
-
+        runOnUiThread {
+            for (i in list.indices) {
+                listFragment.adapter.addRun(list[i])
+            }
         }
     }
 
@@ -115,7 +135,6 @@ class MainActivity : AppCompatActivity() {
                 connection.readTimeout = 10000
                 connection.requestMethod = "GET"
                 connection.connect()
-
                 val responseCode = connection.responseCode
                 if (responseCode == HttpURLConnection.HTTP_OK) {
                     val scanner = Scanner(connection.inputStream).useDelimiter("\\A")
@@ -125,20 +144,14 @@ class MainActivity : AppCompatActivity() {
                     addRunFromList(list)
 
                 } else {
-                    println("the server has returned an error: $responseCode")
+                    Toast.makeText(this, "the server has returned an error: $responseCode",Toast.LENGTH_LONG).show()
                 }
             } catch (e: IOException) {
-                println("en error occurred retrieving data")
+                Toast.makeText(this, "an error occurred retrieving data",Toast.LENGTH_LONG).show()
             }
         }
         thread.start()
     }
-
-    private fun newSearch() {
-        val intent = Intent(this,NewSearchActivity::class.java)
-        startActivityForResult(intent,0)
-    }
-
 
 
 }

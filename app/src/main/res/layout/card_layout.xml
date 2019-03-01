@@ -17,7 +17,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:layout_marginLeft="10dp" android:layout_marginStart="10dp"
-                android:layout_marginRight="30dp" android:layout_marginEnd="30dp"
+                android:layout_marginRight="30dp" android:layout_marginEnd="20dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/tvDungeonName"
                 android:text="@string/_20"
@@ -32,7 +32,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:text="Temple of Sethraliss"
                 android:textSize="20sp"
-                android:layout_marginRight="50dp" android:layout_marginEnd="50dp"
+                android:layout_marginRight="8dp" android:layout_marginEnd="8dp"
                 android:textAlignment="center"
                 />
         <TextView
@@ -56,8 +56,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" app:srcCompat="@drawable/tyrannical"
                 android:id="@+id/affix1"
-                app:layout_constraintTop_toBottomOf="@id/tvDifficulty" app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginLeft="80dp"  android:layout_marginStart="80dp"
+                app:layout_constraintTop_toBottomOf="@id/tvDifficulty" app:layout_constraintEnd_toStartOf="@id/affix2"
+                android:layout_marginRight="4dp" android:layout_marginEnd="4dp"
                 android:layout_marginTop="30dp" android:layout_marginBottom="10dp"
                 android:contentDescription="@string/dungeon_modifier"
                 />
@@ -65,8 +65,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" app:srcCompat="@drawable/skittish"
                 android:id="@+id/affix2"
-                app:layout_constraintTop_toBottomOf="@id/tvDifficulty" app:layout_constraintStart_toEndOf="@+id/affix1"
-                android:layout_marginLeft="4dp" android:layout_marginStart="4dp"
+                app:layout_constraintTop_toBottomOf="@id/tvDifficulty" app:layout_constraintEnd_toStartOf="@id/affix3"
+                android:layout_marginRight="4dp" android:layout_marginEnd="4dp"
                 android:layout_marginTop="30dp" android:layout_marginBottom="10dp"
                 android:contentDescription="@string/dungeon_modifier"
         />
@@ -75,8 +75,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" app:srcCompat="@drawable/skittish"
                 android:id="@+id/affix3"
-                app:layout_constraintTop_toBottomOf="@id/tvDifficulty" app:layout_constraintStart_toEndOf="@id/affix2"
-                android:layout_marginLeft="4dp" android:layout_marginStart="4dp"
+                app:layout_constraintTop_toBottomOf="@id/tvDifficulty" app:layout_constraintEnd_toStartOf="@id/affix4"
+                android:layout_marginRight="4dp" android:layout_marginEnd="4dp"
                 android:layout_marginTop="30dp" android:layout_marginBottom="10dp"
                 android:contentDescription="@string/dungeon_modifier"
                 />
@@ -85,8 +85,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" app:srcCompat="@drawable/reaping"
                 android:id="@+id/affix4"
-                app:layout_constraintTop_toBottomOf="@id/tvDifficulty" app:layout_constraintStart_toEndOf="@id/affix3"
-                android:layout_marginLeft="4dp" android:layout_marginStart="4dp"
+                app:layout_constraintTop_toBottomOf="@id/tvDifficulty"
+                app:layout_constraintEnd_toStartOf="@id/class1"
+                android:layout_marginRight="4dp" android:layout_marginEnd="50dp"
                 android:layout_marginTop="30dp" android:layout_marginBottom="10dp"
                 android:contentDescription="@string/dungeon_modifier"
                 />
@@ -96,8 +97,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" app:srcCompat="@drawable/class_deathknight"
                 android:id="@+id/class1"
-                app:layout_constraintTop_toBottomOf="@id/tvDifficulty" app:layout_constraintStart_toEndOf="@id/affix4"
-                android:layout_marginLeft="40dp" android:layout_marginStart="45dp"
+                app:layout_constraintTop_toBottomOf="@id/tvDifficulty" app:layout_constraintEnd_toStartOf="@id/class2"
+                android:layout_marginRight="4dp" android:layout_marginEnd="4dp"
                 android:layout_marginTop="30dp" android:layout_marginBottom="10dp"
                 android:contentDescription="@string/dungeon_modifier"
                 />
@@ -105,8 +106,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" app:srcCompat="@drawable/class_deathknight"
                 android:id="@+id/class2"
-                app:layout_constraintTop_toBottomOf="@id/tvDifficulty" app:layout_constraintStart_toEndOf="@id/class1"
-                android:layout_marginLeft="4dp" android:layout_marginStart="4dp"
+                app:layout_constraintTop_toBottomOf="@id/tvDifficulty" app:layout_constraintEnd_toStartOf="@id/class3"
+                android:layout_marginRight="4dp" android:layout_marginEnd="4dp"
                 android:layout_marginTop="30dp" android:layout_marginBottom="10dp"
                 android:contentDescription="@string/dungeon_modifier"
                 />
@@ -114,8 +115,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" app:srcCompat="@drawable/class_deathknight"
                 android:id="@+id/class3"
-                app:layout_constraintTop_toBottomOf="@id/tvDifficulty" app:layout_constraintStart_toEndOf="@id/class2"
-                android:layout_marginLeft="4dp" android:layout_marginStart="4dp"
+                app:layout_constraintTop_toBottomOf="@id/tvDifficulty" app:layout_constraintEnd_toStartOf="@id/class4"
+                android:layout_marginRight="4dp" android:layout_marginEnd="4dp"
                 android:layout_marginTop="30dp" android:layout_marginBottom="10dp"
                 android:contentDescription="@string/dungeon_modifier"
                 />
@@ -123,8 +124,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" app:srcCompat="@drawable/class_deathknight"
                 android:id="@+id/class4"
-                app:layout_constraintTop_toBottomOf="@id/tvDifficulty" app:layout_constraintStart_toEndOf="@id/class3"
-                android:layout_marginLeft="4dp" android:layout_marginStart="4dp"
+                app:layout_constraintTop_toBottomOf="@id/tvDifficulty" app:layout_constraintEnd_toStartOf="@id/class5"
+                android:layout_marginRight="4dp" android:layout_marginEnd="4dp"
                 android:layout_marginTop="30dp" android:layout_marginBottom="10dp"
                 android:contentDescription="@string/dungeon_modifier"
                 />
@@ -132,9 +133,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" app:srcCompat="@drawable/class_deathknight"
                 android:id="@+id/class5"
-                app:layout_constraintTop_toBottomOf="@id/tvDifficulty" app:layout_constraintStart_toEndOf="@id/class4"
-                android:layout_marginLeft="4dp" android:layout_marginStart="4dp"
+                app:layout_constraintTop_toBottomOf="@id/tvDifficulty" app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="30dp" android:layout_marginBottom="10dp"
+                android:layout_marginRight="24dp" android:layout_marginEnd="45dp"
                 android:contentDescription="@string/dungeon_modifier"
                 />
 

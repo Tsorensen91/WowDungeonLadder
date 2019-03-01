@@ -1,23 +1,26 @@
 package com.co5225.j41564
 
 
+
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import kotlinx.android.synthetic.main.fragment_dungeon_list.*
+import java.io.IOException
+import java.net.HttpURLConnection
+import java.net.URL
+import java.util.*
 
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- *
- */
 class DungeonListFragment : Fragment() {
+
+    lateinit var layoutManager: RecyclerView.LayoutManager
+    lateinit var adapter: RecyclerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,6 +29,19 @@ class DungeonListFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_dungeon_list, container, false)
     }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        layoutManager = LinearLayoutManager(activity)
+        rvDungeonRunList.layoutManager = layoutManager
+        adapter = RecyclerAdapter()
+        rvDungeonRunList.adapter = adapter
+
+    }
+
+
+
 
 
 }
