@@ -1,10 +1,14 @@
 package com.co5225.j41564
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.graphics.Color
+import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -14,6 +18,8 @@ import android.widget.Button
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.IOException
+import java.io.ObjectInputStream
+import java.io.ObjectOutputStream
 import java.net.HttpURLConnection
 import java.net.URL
 import java.util.*
@@ -30,8 +36,9 @@ class MainActivity : AppCompatActivity(), SearchFragment.SearchFragmentListener 
         listFragment = listFr as DungeonListFragment
         setSupportActionBar(toolbar)
         toolbar.setTitleTextColor(Color.parseColor("#FFFFFF"))
-        updateTheme()
         PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(preferenceChangedListener)
+        updateTheme()
+        loadList()
         if (savedInstanceState!= null) {
             searchParameters = savedInstanceState.getStringArray("searchParameters")!!
         }
@@ -80,6 +87,33 @@ class MainActivity : AppCompatActivity(), SearchFragment.SearchFragmentListener 
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
         outState?.putStringArray("searchParameters", searchParameters)
+        saveList()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        saveList()
+    }
+
+    private fun saveList() {
+        val fileOutPutStream = openFileOutput("searchParameters.dat", Context.MODE_PRIVATE)
+        val objectOutputStream = ObjectOutputStream(fileOutPutStream)
+        objectOutputStream.writeObject(searchParameters)
+        objectOutputStream.close()
+        fileOutPutStream.close()
+    }
+
+    private fun loadList() {
+        try{
+            val fileInputStream = openFileInput("searchParameters.dat")
+            val objectInputStream = ObjectInputStream(fileInputStream)
+            val loadedSearchParameters = objectInputStream.readObject() as? Array<String>
+            if (loadedSearchParameters != null) searchParameters = loadedSearchParameters
+            objectInputStream.close()
+            fileInputStream.close()
+        } catch (e: java.io.FileNotFoundException) {
+            Toast.makeText(this, "No previous search parameters found",Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun updateTheme() {
@@ -130,7 +164,7 @@ class MainActivity : AppCompatActivity(), SearchFragment.SearchFragmentListener 
             "All" -> dungeonURL = ""
             "AtalDazar" -> dungeonURL = "&dungeon=ataldazar"
             "Freehold" -> dungeonURL = "&dungeon=freehold"
-            "Kings rest" -> dungeonURL = "&dungeon=kings-rest"
+            "Kings Rest" -> dungeonURL = "&dungeon=kings-rest"
             "Shrine of the Storm" -> dungeonURL = "&dungeon=shrine-of-the-storm"
             "Siege of Boralus" -> dungeonURL = "&dungeon=siege-of-boralus"
             "Temple of Sethraliss" -> dungeonURL = "&dungeon=temple-of-sethraliss"
