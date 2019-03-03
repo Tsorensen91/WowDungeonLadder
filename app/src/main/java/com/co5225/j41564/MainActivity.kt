@@ -1,5 +1,6 @@
 package com.co5225.j41564
 
+import android.animation.ObjectAnimator
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -14,9 +15,12 @@ import android.os.Bundle
 import android.preference.PreferenceManager
 import android.view.Menu
 import android.view.MenuItem
+import android.view.animation.LinearInterpolator
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.card_layout.*
 import java.io.IOException
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
@@ -37,13 +41,11 @@ class MainActivity : AppCompatActivity(), SearchFragment.SearchFragmentListener 
         setSupportActionBar(toolbar)
         toolbar.setTitleTextColor(Color.parseColor("#FFFFFF"))
         PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(preferenceChangedListener)
-        updateTheme()
         loadList()
         if (savedInstanceState!= null) {
             searchParameters = savedInstanceState.getStringArray("searchParameters")!!
         }
         getDungeonRuns(searchParameters)
-
     }
 
     override fun onSearch(searchParameter: Array<String>) {
@@ -107,6 +109,8 @@ class MainActivity : AppCompatActivity(), SearchFragment.SearchFragmentListener 
         try{
             val fileInputStream = openFileInput("searchParameters.dat")
             val objectInputStream = ObjectInputStream(fileInputStream)
+
+            @Suppress("UNCHECKED_CAST")
             val loadedSearchParameters = objectInputStream.readObject() as? Array<String>
             if (loadedSearchParameters != null) searchParameters = loadedSearchParameters
             objectInputStream.close()
@@ -121,8 +125,10 @@ class MainActivity : AppCompatActivity(), SearchFragment.SearchFragmentListener 
         val redTheme = preference.getBoolean("theme_changer",false)
         if (redTheme) {
             toolbar.setBackgroundColor(Color.parseColor("#8C1616"))
+            listFragment.adapter!!.changeToRedTheme()
         } else {
             toolbar.setBackgroundColor(Color.parseColor("#144587"))
+            listFragment.adapter!!.changeToBlueTheme()
         }
     }
 
@@ -197,12 +203,15 @@ class MainActivity : AppCompatActivity(), SearchFragment.SearchFragmentListener 
                     val jsonPacket = JSONUnpacker(text)
                     val list = jsonPacket.getDungeonList()
                     addRunFromList(list)
-
                 } else {
-                    Toast.makeText(this, "the server has returned an error: $responseCode",Toast.LENGTH_LONG).show()
+                    runOnUiThread {
+                        Toast.makeText(this, "The server has returned an error: $responseCode", Toast.LENGTH_LONG).show()
+                    }
                 }
             } catch (e: IOException) {
-                Toast.makeText(this, "an error occurred retrieving data",Toast.LENGTH_LONG).show()
+                runOnUiThread {
+                    Toast.makeText(this, "An error occurred retrieving data", Toast.LENGTH_LONG).show()
+                }
             }
         }
         thread.start()

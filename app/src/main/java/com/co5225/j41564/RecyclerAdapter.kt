@@ -1,15 +1,20 @@
 package com.co5225.j41564
 
+import android.animation.ObjectAnimator
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.LinearInterpolator
 import kotlinx.android.synthetic.main.card_layout.view.*
 
-class RecyclerAdapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder> (){
+
+class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder> (){
 
     var list = mutableListOf<DungeonRun>()
-
+    var redTheme = true
+    var currentColor = "red"
+    var themeNeedsUpdating = false
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.card_layout, viewGroup, false)
@@ -49,6 +54,14 @@ class RecyclerAdapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder> (){
         cardView.tvDifficulty.text = difficulty
         cardView.tvDungeonName.text = item.name
 
+        if (themeNeedsUpdating) {
+            animation(cardView)
+            if (position == 3) {
+                themeNeedsUpdating = false
+            }
+        } else {
+            if (redTheme) cardView.themeBar.progress = 100 else cardView.themeBar.progress = 0
+        }
     }
 
     private fun classImageAssigner(cardView: View, characterClass: String, characterNr : Int) {
@@ -164,6 +177,33 @@ class RecyclerAdapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder> (){
     }
 
     inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
+    }
+
+    fun animation (cardView: View) {
+        if (redTheme) {
+            val progressAnimator = ObjectAnimator.ofInt(cardView.themeBar, "progress", 0, 100)
+            progressAnimator.duration = 2000
+            progressAnimator.interpolator = LinearInterpolator()
+            progressAnimator.start()
+            currentColor = "red"
+        } else {
+            val progressAnimator = ObjectAnimator.ofInt(cardView.themeBar, "progress", 100, 0)
+            progressAnimator.duration = 2000
+            progressAnimator.interpolator = LinearInterpolator()
+            progressAnimator.start()
+            currentColor = "blue"
+        }
+    }
+
+    fun changeToRedTheme () {
+        redTheme = true
+        if (currentColor != "red") themeNeedsUpdating=true else themeNeedsUpdating = false
+        notifyDataSetChanged()
+    }
+    fun changeToBlueTheme() {
+        redTheme = false
+        if (currentColor != "blue") themeNeedsUpdating=true else themeNeedsUpdating = false
+        notifyDataSetChanged()
     }
 
     fun addRun (run : DungeonRun) {

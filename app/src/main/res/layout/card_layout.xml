@@ -138,6 +138,18 @@
                 android:layout_marginRight="24dp" android:layout_marginEnd="45dp"
                 android:contentDescription="@string/dungeon_modifier"
                 />
+        <ProgressBar
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/affix1"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="20dp"
+                android:progress="20"
+                android:progressBackgroundTint="#144587"
+                android:progressBackgroundTintMode="src_over"
+                android:progressTint="#8C1616"
+                android:id="@+id/themeBar"/>
 
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>
