@@ -23,10 +23,48 @@
     <fragment
             android:layout_width="0dp"
             android:layout_height="0dp" android:name="com.co5225.j41564.DungeonListFragment"
-            app:layout_constraintTop_toBottomOf="@id/toolbar" app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rankbar" app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
             android:id="@+id/listFr"
-            app:layout_constraintVertical_bias="1.0"/>
+            app:layout_constraintVertical_bias="1.0"
+    />
+
+    <TextView
+            android:text="@string/rank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toStartOf="@id/regionbar"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            android:id="@+id/rankbar"
+    />
+    <TextView
+            android:text="@string/region"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/regionbar"
+            app:layout_constraintStart_toEndOf="@id/rankbar" app:layout_constraintEnd_toStartOf="@id/difficultybar"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            android:layout_marginRight="25dp" android:layout_marginEnd="25dp"
+    />
+    <TextView
+            android:text="@string/difficulty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/regionbar" app:layout_constraintEnd_toStartOf="@id/dungeonbar"
+            app:layout_constraintTop_toBottomOf="@id/toolbar" android:layout_marginRight="50dp"
+            android:layout_marginEnd="50dp"
+            android:id="@+id/difficultybar"/>
+    <TextView
+            android:text="@string/dungeon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             android:id="@+id/dungeonbar"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toEndOf="@id/difficultybar"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            android:layout_marginEnd="80dp" android:layout_marginRight="80dp"
+    />
+
+
 
 
 

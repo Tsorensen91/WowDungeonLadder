@@ -1,6 +1,7 @@
 package com.co5225.j41564
 
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -18,6 +19,7 @@ import android.view.MenuItem
 import android.view.animation.LinearInterpolator
 import android.widget.Button
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.card_layout.*
@@ -125,10 +127,10 @@ class MainActivity : AppCompatActivity(), SearchFragment.SearchFragmentListener 
         val redTheme = preference.getBoolean("theme_changer",false)
         if (redTheme) {
             toolbar.setBackgroundColor(Color.parseColor("#8C1616"))
-            listFragment.adapter!!.changeToRedTheme()
+            listFragment.adapter.changeToRedTheme()
         } else {
             toolbar.setBackgroundColor(Color.parseColor("#144587"))
-            listFragment.adapter!!.changeToBlueTheme()
+            listFragment.adapter.changeToBlueTheme()
         }
     }
 
@@ -144,9 +146,11 @@ class MainActivity : AppCompatActivity(), SearchFragment.SearchFragmentListener 
 
     fun addRunFromList (list : List<DungeonRun>) {
         runOnUiThread {
+            updateTheme()
             for (i in list.indices) {
                 listFragment.adapter.addRun(list[i])
             }
+
         }
     }
 
@@ -154,17 +158,26 @@ class MainActivity : AppCompatActivity(), SearchFragment.SearchFragmentListener 
         fetchData(urlCompiler(searchParameters))
     }
 
+    @SuppressLint("SetTextI18n")
     fun urlCompiler(searchParameters : Array<String>): String{
         val baseURl = "https://raider.io/api/v1/mythic-plus/runs?season=season-bfa-2"
         var regionURL = ""
         var dungeonURL = ""
         var affixURL = ""
+        val regionBar = findViewById<TextView>(R.id.regionbar)
         when (searchParameters[0]) {
             "All" -> regionURL = "&region=world"
             "EU" -> regionURL = "&region=eu"
             "US" -> regionURL = "&region=us"
             "TW" -> regionURL = "&region=tw"
             "KR" -> regionURL = "&region=kr"
+        }
+        when (searchParameters[0]) {
+            "All" -> regionbar?.text = "Region: World"
+            "EU" -> regionBar.text = "Region: EU"
+            "US" -> regionBar.text = "Region: US"
+            "TW" -> regionBar.text = "Region: TW"
+            "KR" -> regionBar.text = "Region: KR"
         }
         when (searchParameters[1]) {
             "All" -> dungeonURL = ""
