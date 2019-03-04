@@ -145,7 +145,6 @@
                 app:layout_constraintTop_toBottomOf="@id/affix1"
                 app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="20dp"
-                android:progress="20"
                 android:progressBackgroundTint="#144587"
                 android:progressBackgroundTintMode="src_over"
                 android:progressTint="#8C1616"

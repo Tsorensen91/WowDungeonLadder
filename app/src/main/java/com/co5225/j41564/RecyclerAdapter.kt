@@ -33,6 +33,7 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder> (){
         val affix2 = item.modifiers[1]
         val affix3 = item.modifiers[2]
         when (affix1) {
+            //images adapted from raider.io, 2019
             "Tyrannical" -> cardView.affix1.setImageResource(R.drawable.tyrannical)
             "Fortified" -> cardView.affix1.setImageResource(R.drawable.fortified)
         }
@@ -64,7 +65,9 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder> (){
         }
     }
 
+    //shows class icons for classes in the dungeon
     private fun classImageAssigner(cardView: View, characterClass: String, characterNr : Int) {
+        //images adapted from raider.io, 2019
         when (characterNr) {
             1 ->
             when (characterClass) {
@@ -144,7 +147,9 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder> (){
         }
     }
 
+    //shows modifier icons for modifiers in the dungeon
     private fun generalAffixImageAssigner(cardView: View, affix: String, affixNr : Int) {
+        //images adapted from raider.io, 2019
         if (affixNr == 2) {
             when (affix) {
                 "Bolstering" -> cardView.affix2.setImageResource(R.drawable.bolstering)
@@ -179,6 +184,7 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder> (){
     inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
     }
 
+    //code adapted from rsicarelli, 2015
     fun animation (cardView: View) {
         if (redTheme) {
             val progressAnimator = ObjectAnimator.ofInt(cardView.themeBar, "progress", 0, 100)
@@ -194,6 +200,7 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder> (){
             currentColor = "blue"
         }
     }
+    //end of adapted code
 
     fun changeToRedTheme () {
         redTheme = true

@@ -9,6 +9,7 @@ class JSONUnpacker (jsonString: String){
     val rankingsArray = jsonObject.getJSONArray("rankings")
     var list = mutableListOf<DungeonRun>()
     init {
+        //dives into JSONObject made from the JSONString and extracts information needed. (dungeon modifiers etc.)
         for (j in 0..19) {
             val rankObject = rankingsArray.getJSONObject(j)
             val rankings = rankObject.get("rank").toString().toInt()
@@ -16,7 +17,6 @@ class JSONUnpacker (jsonString: String){
             val dungeonObject = runObject.getJSONObject("dungeon")
             val dungeonName = dungeonObject.get("name").toString()
             val dungeonLevel = runObject.get("mythic_level").toString().toInt()
-
 
             val modifierNumber = runObject.get("num_modifiers_active").toString().toInt()
             val modifierArray = runObject.getJSONArray("weekly_modifiers")

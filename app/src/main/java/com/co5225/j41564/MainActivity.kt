@@ -116,6 +116,7 @@ class MainActivity : AppCompatActivity(), SearchFragment.SearchFragmentListener 
         }
     }
 
+    //checks for theme selected in preference and updates
     private fun updateTheme() {
         val preference = PreferenceManager.getDefaultSharedPreferences(this)
         val redTheme = preference.getBoolean("theme_changer",false)
@@ -151,7 +152,7 @@ class MainActivity : AppCompatActivity(), SearchFragment.SearchFragmentListener 
         fetchData(urlCompiler(searchParameters))
     }
 
-
+    //looks at search parameters, appends the URL accordingly and updates region if shown.
     @SuppressLint("SetTextI18n")
     fun urlCompiler(searchParameters : Array<String>): String{
         val baseURl = "https://raider.io/api/v1/mythic-plus/runs?season=season-bfa-2"
@@ -173,7 +174,7 @@ class MainActivity : AppCompatActivity(), SearchFragment.SearchFragmentListener 
                 "EU" -> regionBar.text = "Region: EU"
                 "US" -> regionBar.text = "Region: US"
                 "TW" -> regionBar.text = "Region: TW"
-                "KR" -> regionBar.text = "&Region: KR"
+                "KR" -> regionBar.text = "Region: KR"
             }
         }
 

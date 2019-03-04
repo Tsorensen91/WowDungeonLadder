@@ -24,6 +24,7 @@ class SearchFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        //creates spinners and saves selected items in string list and passes through on button click.
         val searchParameterArray : Array<String> = arrayOf("All", "All", "All")
         val regionSpinner : Spinner = activity!!.findViewById(R.id.regionSpinner)
         val dungeonSpinner : Spinner = activity!!.findViewById(R.id.dungeonSpinner)
@@ -33,9 +34,7 @@ class SearchFragment : Fragment() {
         regionSpinner.adapter = adapter
         regionSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
-
             }
-
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val selectedItem = parent?.getItemAtPosition(position).toString()
                 searchParameterArray[0] = selectedItem
@@ -45,9 +44,7 @@ class SearchFragment : Fragment() {
         dungeonSpinner.adapter = adapter
         dungeonSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
-
             }
-
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val selectedItem = parent?.getItemAtPosition(position).toString()
                 searchParameterArray[1] = selectedItem
@@ -58,9 +55,7 @@ class SearchFragment : Fragment() {
         affixSpinner.adapter = adapter
         affixSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
-
             }
-
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val selectedItem = parent?.getItemAtPosition(position).toString()
                 searchParameterArray[2] = selectedItem
